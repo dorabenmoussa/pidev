@@ -91,7 +91,14 @@ public class Utilisateur implements Serializable {
     @JsonIgnoreProperties(value = { "users", "duscutions" }, allowSetters = true)
     private Set<Message> messages = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Article> articles;
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Commentaire> commentaires;
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Questionnaire> questionnaires;
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Emotion> emotions;
 
     public Long getId() {
         return this.id;
@@ -554,3 +561,4 @@ public class Utilisateur implements Serializable {
             "}";
     }
 }
+
