@@ -6,15 +6,12 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * not an ignored comment
  */
 @Entity
 @Table(name = "evenement")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Evenement implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,7 +44,6 @@ public class Evenement implements Serializable {
     private Partenaire partenaire;
 
     @ManyToMany(mappedBy = "evenements")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "evenements", "offre", "partenaire", "utilisateur" }, allowSetters = true)
     private Set<Reservation> reservations = new HashSet<>();
 

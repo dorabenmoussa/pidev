@@ -5,15 +5,13 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import tn.esprit.pidev.*;
 
 /**
  * A Reponse.
  */
 @Entity
 @Table(name = "reponse")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Reponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,7 +28,6 @@ public class Reponse implements Serializable {
     private String desc;
 
     @OneToMany(mappedBy = "reponse")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "evalutionType", "reponse", "utilisateur" }, allowSetters = true)
     private Set<Evaluation> evaluations = new HashSet<>();
 

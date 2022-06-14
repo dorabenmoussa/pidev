@@ -4,15 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 /**
  * A CommentairePub.
  */
 @Entity
 @Table(name = "commentaire_pub")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CommentairePub implements Serializable {
 
     private static final long serialVersionUID = 1L;

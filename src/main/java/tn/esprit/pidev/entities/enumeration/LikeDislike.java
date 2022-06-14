@@ -1,4 +1,4 @@
-package com.esprit.pidev.domain.enumeration;
+package tn.esprit.pidev.entities.enumeration;
 
 /**
  * The LikeDislike enumeration.

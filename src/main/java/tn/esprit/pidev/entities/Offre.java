@@ -1,21 +1,18 @@
 package tn.esprit.pidev.entities;
 
-import com.esprit.pidev.domain.enumeration.TypeOffre;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import tn.esprit.pidev.entities.*;
+import tn.esprit.pidev.entities.enumeration.TypeOffre;
 
 /**
  * A Offre.
  */
 @Entity
 @Table(name = "offre")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Offre implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,19 +36,14 @@ public class Offre implements Serializable {
     private TypeOffre typeOffre;
 
     @OneToMany(mappedBy = "offre")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "offre" }, allowSetters = true)
-    private Set<Publicite> publicites = new HashSet<>();
+    private Set<Publicite> publicites;
 
     @OneToMany(mappedBy = "offre")
-    @ManyToOne
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "evenements", "offre", "partenaire", "utilisateur" }, allowSetters = true)
-    private Set<Reservation> reservations = new HashSet<>();
+    private Set<Reservation> reservations;
 
-    @OneToMany(mappedBy = "offre")
-    @ManyToOne
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @ManyToOne()
     @JsonIgnoreProperties(
         value = { "reservations", "offres", "conventions", "abonnements", "evenements", "utilisateur" },
         allowSetters = true

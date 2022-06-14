@@ -1,11 +1,12 @@
 package tn.esprit.pidev.entities;
 
-import com.esprit.pidev.domain.enumeration.ContentType;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import tn.esprit.pidev.entities.enumeration.ContentType;
 
 /**
  * A Notification.

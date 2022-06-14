@@ -5,15 +5,12 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Partenaire.
  */
 @Entity
 @Table(name = "partenaire")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Partenaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,27 +30,22 @@ public class Partenaire implements Serializable {
     private String matriculation;
 
     @OneToMany(mappedBy = "partenaire")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "evenements", "offre", "partenaire", "utilisateur" }, allowSetters = true)
     private Set<Reservation> reservations = new HashSet<>();
 
     @OneToMany(mappedBy = "reservation")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "publicites", "reservations", "reservation" }, allowSetters = true)
     private Set<Offre> offres = new HashSet<>();
 
     @OneToMany(mappedBy = "partenaire")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "partenaire" }, allowSetters = true)
     private Set<Convention> conventions = new HashSet<>();
 
     @OneToMany(mappedBy = "partenaire")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "partenaire", "utilisateur" }, allowSetters = true)
     private Set<Abonnements> abonnements = new HashSet<>();
 
     @OneToMany(mappedBy = "partenaire")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "partenaire", "reservations" }, allowSetters = true)
     private Set<Evenement> evenements = new HashSet<>();
 

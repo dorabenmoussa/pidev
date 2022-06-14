@@ -3,15 +3,12 @@ package tn.esprit.pidev.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A NotificationToken.
  */
 @Entity
 @Table(name = "notification_token")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class NotificationToken implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,20 +1,18 @@
 package tn.esprit.pidev.entities;
 
-import com.esprit.pidev.domain.enumeration.Role;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import tn.esprit.pidev.*;
+import tn.esprit.pidev.entities.enumeration.Role;
 
 /**
  * A Utilisateur.
  */
 @Entity
 @Table(name = "utilisateur")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Utilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,37 +45,30 @@ public class Utilisateur implements Serializable {
     private String phone;
 
     @OneToMany(mappedBy = "utilisateur")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
     private Set<Badges> badges = new HashSet<>();
 
     @OneToMany(mappedBy = "utilisateur")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "evalutionType", "reponse", "utilisateur" }, allowSetters = true)
     private Set<Evaluation> evaluations = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "commentairePubs", "user" }, allowSetters = true)
     private Set<Publication> publications = new HashSet<>();
 
     @OneToMany(mappedBy = "utilisateur")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
     private Set<NotificationToken> fcmTokens = new HashSet<>();
 
     @OneToMany(mappedBy = "utilisateur")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "evenements", "offre", "partenaire", "utilisateur" }, allowSetters = true)
     private Set<Reservation> reservations = new HashSet<>();
 
     @OneToMany(mappedBy = "utilisateur")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
     private Set<Notification> notifications = new HashSet<>();
 
     @OneToMany(mappedBy = "utilisateur")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = { "reservations", "offres", "conventions", "abonnements", "evenements", "utilisateur" },
         allowSetters = true
@@ -85,12 +76,10 @@ public class Utilisateur implements Serializable {
     private Set<Partenaire> partenaires = new HashSet<>();
 
     @OneToMany(mappedBy = "utilisateur")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
     private Set<Activite> activites = new HashSet<>();
 
     @OneToMany(mappedBy = "utilisateur")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "partenaire", "utilisateur" }, allowSetters = true)
     private Set<Abonnements> abonnements = new HashSet<>();
 
@@ -99,7 +88,6 @@ public class Utilisateur implements Serializable {
     private Departement departement;
 
     @ManyToMany(mappedBy = "users")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "users", "duscutions" }, allowSetters = true)
     private Set<Message> messages = new HashSet<>();
 
