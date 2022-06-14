@@ -11,7 +11,7 @@ import tn.esprit.pidev.entities.Utilisateur;
 import tn.esprit.pidev.repository.ArticleRepository;
 
 @SpringBootApplication
-public class PidevApplication implements CommandLineRunner {
+public class PidevApplication {
 
 	@Autowired
 	private ArticleRepository articleRepository;
@@ -20,18 +20,4 @@ public class PidevApplication implements CommandLineRunner {
 		SpringApplication.run(PidevApplication.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		// Dummy data
-		Sujet s = new Sujet("Sujet label");
-		Utilisateur u = new Utilisateur("abc", "efg");
-
-		Article a = new Article();
-		//a.setSujet(s);
-		//a.setUtilisateur(u);
-		a.setNom_article("Nom article behi");
-		a.setTexte("Text behi barcha");
-		Article x = articleRepository.save(a);
-
-	}
 }
