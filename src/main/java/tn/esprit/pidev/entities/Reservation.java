@@ -1,22 +1,20 @@
 package tn.esprit.pidev.entities;
 
-import com.esprit.pidev.domain.enumeration.Type;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.domain.Persistable;
+import tn.esprit.pidev.entities.enumeration.Type;
 
 /**
  * A Reservation.
  */
 @Entity
 @Table(name = "reservation")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Reservation implements Serializable, Persistable<String> {
 
     private static final long serialVersionUID = 1L;
@@ -41,7 +39,6 @@ public class Reservation implements Serializable, Persistable<String> {
         joinColumns = @JoinColumn(name = "reservation_id"),
         inverseJoinColumns = @JoinColumn(name = "evenement_id")
     )
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "partenaire", "reservations" }, allowSetters = true)
     private Set<Evenement> evenements = new HashSet<>();
 

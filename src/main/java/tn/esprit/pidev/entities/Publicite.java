@@ -4,15 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import tn.esprit.pidev.*;
 
 /**
  * A Publicite.
  */
 @Entity
 @Table(name = "publicite")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Publicite implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -5,15 +5,13 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 
 /**
  * A Entreprise.
  */
 @Entity
 @Table(name = "entreprise")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Entreprise implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,7 +25,6 @@ public class Entreprise implements Serializable {
     private String nom;
 
     @OneToMany(mappedBy = "entreprise")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "utilisateurs", "entreprise" }, allowSetters = true)
     private Set<Departement> departements = new HashSet<>();
 

@@ -1,21 +1,19 @@
 package tn.esprit.pidev.entities;
 
-import com.esprit.pidev.domain.enumeration.LikeDislike;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import tn.esprit.pidev.entities.enumeration.LikeDislike;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Publication.
  */
 @Entity
 @Table(name = "publication")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Publication implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +47,6 @@ public class Publication implements Serializable {
     private LikeDislike dislikes;
 
     @OneToMany(mappedBy = "pub")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "pub" }, allowSetters = true)
     private Set<CommentairePub> commentairePubs = new HashSet<>();
 

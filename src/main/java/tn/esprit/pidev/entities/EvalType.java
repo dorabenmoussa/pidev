@@ -2,15 +2,12 @@ package tn.esprit.pidev.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A EvalType.
  */
 @Entity
 @Table(name = "eval_type")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class EvalType implements Serializable {
 
     private static final long serialVersionUID = 1L;

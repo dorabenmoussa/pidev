@@ -4,15 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 
 /**
  * A Activite.
  */
 @Entity
 @Table(name = "activite")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Activite implements Serializable {
 
     private static final long serialVersionUID = 1L;

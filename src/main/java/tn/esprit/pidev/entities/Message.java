@@ -5,15 +5,12 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Message.
  */
 @Entity
 @Table(name = "message")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Message implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +29,7 @@ public class Message implements Serializable {
         joinColumns = @JoinColumn(name = "message_id"),
         inverseJoinColumns = @JoinColumn(name = "users_id")
     )
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+
     @JsonIgnoreProperties(
         value = {
             "badges",
@@ -52,7 +49,6 @@ public class Message implements Serializable {
     private Set<Utilisateur> users = new HashSet<>();
 
     @ManyToMany(mappedBy = "messages")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "messages" }, allowSetters = true)
     private Set<Duscution> duscutions = new HashSet<>();
 
