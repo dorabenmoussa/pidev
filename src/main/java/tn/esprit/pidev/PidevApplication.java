@@ -13,9 +13,6 @@ import tn.esprit.pidev.repository.ArticleRepository;
 @SpringBootApplication
 public class PidevApplication {
 
-	@Autowired
-	private ArticleRepository articleRepository;
-
 	public static void main(String[] args) {
 		SpringApplication.run(PidevApplication.class, args);
 	}

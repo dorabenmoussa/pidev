@@ -1,12 +1,12 @@
 package tn.esprit.pidev.repository;
 
-import tn.esprit.pidev.entities.Utilisateur;
+import tn.esprit.pidev.entities.Evenement;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 /**
- * Spring Data SQL repository for the Utilisateur entity.
+ * Spring Data SQL repository for the Evenement entity.
  */
 @SuppressWarnings("unused")
 @Repository
-public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {}
+public interface EvenementRepository extends JpaRepository<Evenement, Long> {}
