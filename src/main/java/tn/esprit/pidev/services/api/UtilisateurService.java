@@ -1,21 +1,57 @@
 package tn.esprit.pidev.services.api;
 
-import org.springframework.stereotype.Service;
 import tn.esprit.pidev.entities.Utilisateur;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+/**
+ * Service Interface for managing {@link Utilisateur}.
+ */
 public interface UtilisateurService {
+    /**
+     * Save a utilisateur.
+     *
+     * @param utilisateur the entity to save.
+     * @return the persisted entity.
+     */
+    Utilisateur save(Utilisateur utilisateur);
 
-    List<Utilisateur> retrieveAllUtilisateurs();
+    /**
+     * Updates a utilisateur.
+     *
+     * @param utilisateur the entity to update.
+     * @return the persisted entity.
+     */
+    Utilisateur update(Utilisateur utilisateur);
 
-    void deleteUtilisateur(Long id);
+    /**
+     * Partially updates a utilisateur.
+     *
+     * @param utilisateur the entity to update partially.
+     * @return the persisted entity.
+     */
+    Optional<Utilisateur> partialUpdate(Utilisateur utilisateur);
 
-    Utilisateur updateUtilisateur(Utilisateur utilisateur);
+    /**
+     * Get all the utilisateurs.
+     *
+     * @return the list of entities.
+     */
+    List<Utilisateur> findAll();
 
-   Utilisateur retrieveUtilisateur(Long id);
+    /**
+     * Get the "id" utilisateur.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Optional<Utilisateur> findOne(Long id);
 
-    Utilisateur ajouterUtilisateur(Utilisateur utilisateur);
+    /**
+     * Delete the "id" utilisateur.
+     *
+     * @param id the id of the entity.
+     */
+    void delete(Long id);
 }
