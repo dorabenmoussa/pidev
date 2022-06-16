@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data SQL repository for the CommentairePub entity.
  */
+/**/
 @SuppressWarnings("unused")
 @Repository
 public interface CommentairePubRepository extends JpaRepository<CommentairePub, Long> {}

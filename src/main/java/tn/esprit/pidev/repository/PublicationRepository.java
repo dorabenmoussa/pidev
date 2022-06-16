@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data SQL repository for the Publication entity.
  */
+/**/
 @SuppressWarnings("unused")
 @Repository
 public interface PublicationRepository extends JpaRepository<Publication, Long> {}
