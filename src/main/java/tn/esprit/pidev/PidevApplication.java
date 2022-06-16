@@ -1,9 +1,11 @@
 package tn.esprit.pidev;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import tn.esprit.pidev.entities.Article;
 import tn.esprit.pidev.entities.Sujet;
@@ -19,5 +21,9 @@ public class PidevApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PidevApplication.class, args);
 	}
-
+   
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 }
