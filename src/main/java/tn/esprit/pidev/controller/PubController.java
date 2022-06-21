@@ -28,8 +28,19 @@ public class PubController {
         return ps.findOne(id);
     }
 
-    @PostMapping("/addPub")
+    @PostMapping(value = "/addPub", consumes = {"application/json"})
     public Publication addPub(@RequestBody Publication publication){
         return ps.save(publication);
+    }
+
+    @DeleteMapping("/deletePub")
+    public void deletePub(@PathVariable("id") Long id){
+         ps.delete(id);
+    }
+
+    @PutMapping("/updatePub")
+    public Publication updatePub(@RequestBody Publication publication){
+
+        return ps.update(publication);
     }
 }
