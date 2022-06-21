@@ -9,9 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
-/**
- * A Publication.
- */
+
 @Entity
 @Table(name = "publication")
 public class Publication implements Serializable {
@@ -26,7 +24,7 @@ public class Publication implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "jhi_desc")
+    @Column(name = "pub_desc")
     private String desc;
 
     @Column(name = "pub_date")
@@ -38,17 +36,19 @@ public class Publication implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "likes")
-    private LikeDislike likes;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "dislikes")
-    private LikeDislike dislikes;
 
     @OneToMany(mappedBy = "pub")
     @JsonIgnoreProperties(value = { "pub" }, allowSetters = true)
     private Set<CommentairePub> commentairePubs = new HashSet<>();
+
+    @OneToMany(mappedBy = "pub")
+    @JsonIgnoreProperties(value = { "pub" }, allowSetters = true)
+    private Set<DisLike> likes = new HashSet<>();
+
+    @OneToMany(mappedBy = "pub")
+    @JsonIgnoreProperties(value = { "pub" }, allowSetters = true)
+    private Set<DisLike> dislikes = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(
@@ -149,30 +149,48 @@ public class Publication implements Serializable {
         this.status = status;
     }
 
-    public LikeDislike getLikes() {
+
+    public Set<DisLike> getLikes() {
         return this.likes;
     }
 
-    public Publication likes(LikeDislike likes) {
-        this.setLikes(likes);
+
+    public void setLikes(Set<DisLike> likes) {
+        if (this.likes != null) {
+            this.likes.forEach(i -> i.setPub(null));
+        }
+        if (likes != null) {
+            likes.forEach(i -> i.setPub(this));
+        }
+        this.likes = likes;
+    }
+    public Publication likes(Set<DisLike> likes) {
+        this.setDislikes(likes);
         return this;
     }
 
-    public void setLikes(LikeDislike likes) {
-        this.likes = likes;
-    }
 
-    public LikeDislike getDislikes() {
+    public Set<DisLike> getDislikes() {
         return this.dislikes;
     }
 
-    public Publication dislikes(LikeDislike dislikes) {
-        this.setDislikes(dislikes);
-        return this;
+    public void setDislikes(DisLike dislikes) {
+        this.dislikes = (Set<DisLike>) dislikes;
     }
 
-    public void setDislikes(LikeDislike dislikes) {
+    public void setDislikes(Set<DisLike> dislikes) {
+        if (this.dislikes != null) {
+            this.dislikes.forEach(i -> i.setPub(null));
+        }
+        if (dislikes != null) {
+            dislikes.forEach(i -> i.setPub(this));
+        }
         this.dislikes = dislikes;
+    }
+
+    public Publication dislikes(Set<DisLike> dislikes) {
+        this.setDislikes(dislikes);
+        return this;
     }
 
     public Set<CommentairePub> getCommentairePubs() {
@@ -194,6 +212,8 @@ public class Publication implements Serializable {
         return this;
     }
 
+
+/*
     public Publication addCommentairePub(CommentairePub commentairePub) {
         this.commentairePubs.add(commentairePub);
         commentairePub.setPub(this);
@@ -205,6 +225,8 @@ public class Publication implements Serializable {
         commentairePub.setPub(null);
         return this;
     }
+    */
+
 
     public Utilisateur getUser() {
         return this.user;

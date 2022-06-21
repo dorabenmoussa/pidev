@@ -88,6 +88,10 @@ public class Utilisateur implements Serializable {
     @JsonIgnoreProperties(value = { "utilisateurs", "entreprise" }, allowSetters = true)
     private Departement departement;
 
+    @ManyToOne
+    //@JsonIgnoreProperties(value = { "utilisateurs", "entreprise" }, allowSetters = true)
+    private DisLike likes;
+
     @ManyToMany(mappedBy = "users")
     @JsonIgnoreProperties(value = { "users", "duscutions" }, allowSetters = true)
     private Set<Message> messages = new HashSet<>();
@@ -285,6 +289,27 @@ public class Utilisateur implements Serializable {
         this.setPublications(publications);
         return this;
     }
+
+    public Set<DisLike> getLikes() {
+        return (Set<DisLike>) this.likes;
+    }
+
+
+    public void setLikes(Set<DisLike> likes) {
+        if (this.likes != null) {
+            this.likes.setUser(null);
+        }
+        if (likes != null) {
+            likes.forEach(i -> i.setUser(this));
+        }
+        this.likes = (DisLike) likes;
+    }
+    public Utilisateur likes(Set<DisLike> likes) {
+        this.setLikes(likes);
+        return this;
+    }
+
+
 
     public Utilisateur addPublication(Publication publication) {
         this.publications.add(publication);

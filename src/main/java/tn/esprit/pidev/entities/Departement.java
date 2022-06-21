@@ -23,7 +23,7 @@ public class Departement implements Serializable {
     @Column(name = "nom")
     private String nom;
 
-    @Column(name = "jhi_desc")
+    @Column(name = "dep_desc")
     private String desc;
 
     @OneToMany(mappedBy = "departement")
@@ -109,7 +109,7 @@ public class Departement implements Serializable {
         return this;
     }
 
-    public Departement addUtilisateur(Utilisateur utilisateur) {
+    /*public Departement addUtilisateur(Utilisateur utilisateur) {
         this.utilisateurs.add(utilisateur);
         utilisateur.setDepartement(this);
         return this;
@@ -120,7 +120,7 @@ public class Departement implements Serializable {
         utilisateur.setDepartement(null);
         return this;
     }
-
+*/
     public Entreprise getEntreprise() {
         return this.entreprise;
     }
