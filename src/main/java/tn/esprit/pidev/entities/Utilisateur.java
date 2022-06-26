@@ -488,6 +488,38 @@ public class Utilisateur implements Serializable {
         return this.departement;
     }
 
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
+    }
+
+    public List<Questionnaire> getQuestionnaires() {
+        return questionnaires;
+    }
+
+    public void setQuestionnaires(List<Questionnaire> questionnaires) {
+        this.questionnaires = questionnaires;
+    }
+
+    public List<Emotion> getEmotions() {
+        return emotions;
+    }
+
+    public void setEmotions(List<Emotion> emotions) {
+        this.emotions = emotions;
+    }
+
     public void setDepartement(Departement departement) {
         this.departement = departement;
     }

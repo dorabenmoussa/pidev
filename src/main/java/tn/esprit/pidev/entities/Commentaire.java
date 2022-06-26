@@ -14,8 +14,11 @@ public class Commentaire {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Article article;
+    @ManyToOne
+    Commentaire commentaire;
 
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "commentaire")
     private Set<Commentaire> commentaires;
     @ManyToOne
     @JoinColumn(name="utilisateur_id")

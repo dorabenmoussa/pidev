@@ -17,6 +17,12 @@ public class Questionnaire {
             joinColumns = @JoinColumn(name = "QUESTIONNAIRE_ID")
     )
     private List<String> questions;
+    @ElementCollection
+    @CollectionTable(
+            name = "REPONSE",
+            joinColumns = @JoinColumn(name = "REPONSE_ID")
+    )
+    private List<String> Reponses;
     @ManyToOne
     @JoinColumn(name="utilisateur_id")
     private Utilisateur utilisateur;
@@ -53,5 +59,13 @@ public class Questionnaire {
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public List<String> getReponses() {
+        return Reponses;
+    }
+
+    public void setReponses(List<String> reponses) {
+        Reponses = reponses;
     }
 }
