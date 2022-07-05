@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.persistence.*;
 import org.springframework.data.domain.Persistable;
 import tn.esprit.pidev.entities.enumeration.Type;
+import tn.esprit.pidev.entities.enumeration.TypeReservation;
 
 /**
  * A Reservation.
@@ -28,7 +29,7 @@ public class Reservation implements Serializable, Persistable<String> {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "reservation_type")
-    private Type reservationType;
+    private TypeReservation reservationType;
 
     @Transient
     private boolean isPersisted;
@@ -100,16 +101,16 @@ public class Reservation implements Serializable, Persistable<String> {
         this.reservationDate = reservationDate;
     }
 
-    public Type getReservationType() {
+    public TypeReservation getReservationType() {
         return this.reservationType;
     }
 
-    public Reservation reservationType(Type reservationType) {
+    public Reservation reservationType(TypeReservation reservationType) {
         this.setReservationType(reservationType);
         return this;
     }
 
-    public void setReservationType(Type reservationType) {
+    public void setReservationType(TypeReservation reservationType) {
         this.reservationType = reservationType;
     }
 
