@@ -2,6 +2,7 @@ package tn.esprit.pidev.services.api;
 
 import tn.esprit.pidev.entities.Convention;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,4 +55,11 @@ public interface ConventionService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    /**
+     * Get the "partenaire" convention.
+     *
+     * @param partenaire the partenaire of the entity.
+     */
+    public List<Convention> findByPartenaire(Long partenaire);
+
 }

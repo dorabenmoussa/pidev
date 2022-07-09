@@ -15,6 +15,7 @@ import tn.esprit.pidev.utils.ResponseUtil;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -170,5 +171,11 @@ public class ConventionController {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/conventions-findByPartenaire/{partenaire}")
+    public List<Convention> findByPartenaire(@PathVariable Long partenaire)
+    {
+        return conventionService.findByPartenaire(partenaire);
     }
 }
