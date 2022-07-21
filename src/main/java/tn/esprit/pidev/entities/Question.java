@@ -1,14 +1,16 @@
 package tn.esprit.pidev.entities;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
- * A EvalType.
+ * A Question.
  */
 @Entity
-@Table(name = "eval_type")
-public class EvalType implements Serializable {
+@Table(name = "question")
+public class Question implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,11 +19,12 @@ public class EvalType implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nom")
-    private String nom;
+    @Column(name = "content")
+    private String content;
 
-    @Column(name = "jhi_desc")
-    private String desc;
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "questions", "choix", "utilisateur" }, allowSetters = true)
+    private Evaluation evaluation;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -29,7 +32,7 @@ public class EvalType implements Serializable {
         return this.id;
     }
 
-    public EvalType id(Long id) {
+    public Question id(Long id) {
         this.setId(id);
         return this;
     }
@@ -38,30 +41,30 @@ public class EvalType implements Serializable {
         this.id = id;
     }
 
-    public String getNom() {
-        return this.nom;
+    public String getContent() {
+        return this.content;
     }
 
-    public EvalType nom(String nom) {
-        this.setNom(nom);
+    public Question content(String content) {
+        this.setContent(content);
         return this;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getDesc() {
-        return this.desc;
+    public Evaluation getEvaluation() {
+        return this.evaluation;
     }
 
-    public EvalType desc(String desc) {
-        this.setDesc(desc);
+    public void setEvaluation(Evaluation evaluation) {
+        this.evaluation = evaluation;
+    }
+
+    public Question evaluation(Evaluation evaluation) {
+        this.setEvaluation(evaluation);
         return this;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -71,10 +74,10 @@ public class EvalType implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof EvalType)) {
+        if (!(o instanceof Question)) {
             return false;
         }
-        return id != null && id.equals(((EvalType) o).id);
+        return id != null && id.equals(((Question) o).id);
     }
 
     @Override
@@ -86,10 +89,9 @@ public class EvalType implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "EvalType{" +
+        return "Question{" +
             "id=" + getId() +
-            ", nom='" + getNom() + "'" +
-            ", desc='" + getDesc() + "'" +
+            ", content='" + getContent() + "'" +
             "}";
     }
 }

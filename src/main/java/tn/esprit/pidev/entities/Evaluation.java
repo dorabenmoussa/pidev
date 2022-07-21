@@ -1,8 +1,14 @@
 package tn.esprit.pidev.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import tn.esprit.pidev.entities.Choix;
+import tn.esprit.pidev.entities.Question;
+import tn.esprit.pidev.entities.Utilisateur;
+
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
@@ -22,36 +28,36 @@ public class Evaluation implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "questions")
-    private String questions;
-
     @Column(name = "evaluation_date")
     private Instant evaluationDate;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private EvalType evalutionType;
+    @Column(name = "note_final")
+    private Integer noteFinal;
+
+    @OneToMany(mappedBy = "evaluation")
+    @JsonIgnoreProperties(value = { "evaluation" }, allowSetters = true)
+    private Set<Question> questions = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "evaluations" }, allowSetters = true)
-    private Reponse reponse;
+    private Choix choix;
 
     @ManyToOne
     @JsonIgnoreProperties(
-        value = {
-            "badges",
-            "evaluations",
-            "publications",
-            "fcmTokens",
-            "reservations",
-            "notifications",
-            "partenaires",
-            "activites",
-            "abonnements",
-            "departement",
-            "messages",
-        },
-        allowSetters = true
+            value = {
+                    "badges",
+                    "evaluations",
+                    "publications",
+                    "fcmTokens",
+                    "reservations",
+                    "notifications",
+                    "partenaires",
+                    "activites",
+                    "abonnements",
+                    "departement",
+                    "messages",
+            },
+            allowSetters = true
     )
     private Utilisateur utilisateur;
 
@@ -83,19 +89,6 @@ public class Evaluation implements Serializable {
         this.description = description;
     }
 
-    public String getQuestions() {
-        return this.questions;
-    }
-
-    public Evaluation questions(String questions) {
-        this.setQuestions(questions);
-        return this;
-    }
-
-    public void setQuestions(String questions) {
-        this.questions = questions;
-    }
-
     public Instant getEvaluationDate() {
         return this.evaluationDate;
     }
@@ -109,29 +102,60 @@ public class Evaluation implements Serializable {
         this.evaluationDate = evaluationDate;
     }
 
-    public EvalType getEvalutionType() {
-        return this.evalutionType;
+    public Integer getNoteFinal() {
+        return this.noteFinal;
     }
 
-    public void setEvalutionType(EvalType evalType) {
-        this.evalutionType = evalType;
-    }
-
-    public Evaluation evalutionType(EvalType evalType) {
-        this.setEvalutionType(evalType);
+    public Evaluation noteFinal(Integer noteFinal) {
+        this.setNoteFinal(noteFinal);
         return this;
     }
 
-    public Reponse getReponse() {
-        return this.reponse;
+    public void setNoteFinal(Integer noteFinal) {
+        this.noteFinal = noteFinal;
     }
 
-    public void setReponse(Reponse reponse) {
-        this.reponse = reponse;
+    public Set<Question> getQuestions() {
+        return this.questions;
     }
 
-    public Evaluation reponse(Reponse reponse) {
-        this.setReponse(reponse);
+    public void setQuestions(Set<Question> questions) {
+        if (this.questions != null) {
+            this.questions.forEach(i -> i.setEvaluation(null));
+        }
+        if (questions != null) {
+            questions.forEach(i -> i.setEvaluation(this));
+        }
+        this.questions = questions;
+    }
+
+    public Evaluation questions(Set<Question> questions) {
+        this.setQuestions(questions);
+        return this;
+    }
+
+    public Evaluation addQuestions(Question question) {
+        this.questions.add(question);
+        question.setEvaluation(this);
+        return this;
+    }
+
+    public Evaluation removeQuestions(Question question) {
+        this.questions.remove(question);
+        question.setEvaluation(null);
+        return this;
+    }
+
+    public Choix getChoix() {
+        return this.choix;
+    }
+
+    public void setChoix(Choix choix) {
+        this.choix = choix;
+    }
+
+    public Evaluation choix(Choix choix) {
+        this.setChoix(choix);
         return this;
     }
 
@@ -171,10 +195,10 @@ public class Evaluation implements Serializable {
     @Override
     public String toString() {
         return "Evaluation{" +
-            "id=" + getId() +
-            ", description='" + getDescription() + "'" +
-            ", questions='" + getQuestions() + "'" +
-            ", evaluationDate='" + getEvaluationDate() + "'" +
-            "}";
+                "id=" + getId() +
+                ", description='" + getDescription() + "'" +
+                ", evaluationDate='" + getEvaluationDate() + "'" +
+                ", noteFinal=" + getNoteFinal() +
+                "}";
     }
 }

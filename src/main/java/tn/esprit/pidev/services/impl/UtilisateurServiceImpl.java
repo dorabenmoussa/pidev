@@ -1,12 +1,13 @@
 package tn.esprit.pidev.services.impl;
 
-import tn.esprit.pidev.entities.Utilisateur;
-import tn.esprit.pidev.repository.UtilisateurRepository;
-import tn.esprit.pidev.services.api.UtilisateurService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tn.esprit.pidev.entities.Utilisateur;
+import tn.esprit.pidev.repository.UtilisateurRepository;
+import tn.esprit.pidev.services.api.UtilisateurService;
+
 
 import java.util.List;
 import java.util.Optional;

@@ -3,10 +3,8 @@ package tn.esprit.pidev.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
-import tn.esprit.pidev.*;
 import tn.esprit.pidev.entities.enumeration.Role;
 
 /**
@@ -50,7 +48,7 @@ public class Utilisateur implements Serializable {
     private Set<Badges> badges = new HashSet<>();
 
     @OneToMany(mappedBy = "utilisateur")
-    @JsonIgnoreProperties(value = { "evalutionType", "reponse", "utilisateur" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "questions", "choix", "utilisateur" }, allowSetters = true)
     private Set<Evaluation> evaluations = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
@@ -71,8 +69,8 @@ public class Utilisateur implements Serializable {
 
     @OneToMany(mappedBy = "utilisateur")
     @JsonIgnoreProperties(
-        value = { "reservations", "offres", "conventions", "abonnements", "evenements", "utilisateur" },
-        allowSetters = true
+            value = { "reservations", "offres", "conventions", "abonnements", "evenements", "utilisateur" },
+            allowSetters = true
     )
     private Set<Partenaire> partenaires = new HashSet<>();
 
@@ -92,14 +90,7 @@ public class Utilisateur implements Serializable {
     @JsonIgnoreProperties(value = { "users", "duscutions" }, allowSetters = true)
     private Set<Message> messages = new HashSet<>();
 
-    @OneToMany(mappedBy = "utilisateur")
-    private List<Article> articles;
-    @OneToMany(mappedBy = "utilisateur")
-    private List<Commentaire> commentaires;
-    @OneToMany(mappedBy = "utilisateur")
-    private List<Questionnaire> questionnaires;
-    @OneToMany(mappedBy = "utilisateur")
-    private List<Emotion> emotions;
+    // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
         return this.id;
@@ -551,15 +542,14 @@ public class Utilisateur implements Serializable {
     @Override
     public String toString() {
         return "Utilisateur{" +
-            "id=" + getId() +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", role='" + getRole() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", jobTitle='" + getJobTitle() + "'" +
-            ", phone='" + getPhone() + "'" +
-            "}";
+                "id=" + getId() +
+                ", firstName='" + getFirstName() + "'" +
+                ", lastName='" + getLastName() + "'" +
+                ", role='" + getRole() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", password='" + getPassword() + "'" +
+                ", jobTitle='" + getJobTitle() + "'" +
+                ", phone='" + getPhone() + "'" +
+                "}";
     }
 }
-

@@ -2,11 +2,11 @@ package tn.esprit.pidev.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tn.esprit.pidev.entities.Evaluation;
+import tn.esprit.pidev.entities.Question;
 
 /**
- * Spring Data SQL repository for the Evaluation entity.
+ * Spring Data SQL repository for the Question entity.
  */
 @SuppressWarnings("unused")
 @Repository
-public interface EvaluationRepository extends JpaRepository<Evaluation, Long> {}
+public interface QuestionRepository extends JpaRepository<Question, Long> {}

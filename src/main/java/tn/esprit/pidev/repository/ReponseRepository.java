@@ -1,6 +1,5 @@
 package tn.esprit.pidev.repository;
 
-import tn.esprit.pidev.entities.Reponse;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 

@@ -1,12 +1,14 @@
 package tn.esprit.pidev.services.impl;
 
-import tn.esprit.pidev.entities.Evaluation;
-import tn.esprit.pidev.repository.EvaluationRepository;
-import tn.esprit.pidev.services.api.EvaluationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import tn.esprit.pidev.entities.Evaluation;
+import tn.esprit.pidev.repository.EvaluationRepository;
+
+import tn.esprit.pidev.services.api.EvaluationService;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,11 +50,11 @@ public class EvaluationServiceImpl implements EvaluationService {
                 if (evaluation.getDescription() != null) {
                     existingEvaluation.setDescription(evaluation.getDescription());
                 }
-                if (evaluation.getQuestions() != null) {
-                    existingEvaluation.setQuestions(evaluation.getQuestions());
-                }
                 if (evaluation.getEvaluationDate() != null) {
                     existingEvaluation.setEvaluationDate(evaluation.getEvaluationDate());
+                }
+                if (evaluation.getNoteFinal() != null) {
+                    existingEvaluation.setNoteFinal(evaluation.getNoteFinal());
                 }
 
                 return existingEvaluation;

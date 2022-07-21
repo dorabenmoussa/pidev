@@ -1,16 +1,17 @@
 package tn.esprit.pidev.controller;
 
-import tn.esprit.pidev.entities.Evaluation;
-import tn.esprit.pidev.repository.EvaluationRepository;
-import tn.esprit.pidev.services.api.EvaluationService;
-import tn.esprit.pidev.controller.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import tn.esprit.pidev.entities.Evaluation;
+import tn.esprit.pidev.repository.EvaluationRepository;
 import tn.esprit.pidev.utils.HeaderUtil;
 import tn.esprit.pidev.utils.ResponseUtil;
+import tn.esprit.pidev.controller.errors.BadRequestAlertException;
+import tn.esprit.pidev.services.api.EvaluationService;
 
 
 import java.net.URI;
@@ -20,7 +21,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * REST controller for managing {@link}.
+ *
  */
 @RestController
 @RequestMapping("/api")
@@ -58,7 +59,7 @@ public class EvaluationController {
         Evaluation result = evaluationService.save(evaluation);
         return ResponseEntity
             .created(new URI("/api/evaluations/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -92,7 +93,7 @@ public class EvaluationController {
         Evaluation result = evaluationService.update(evaluation);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, evaluation.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, evaluation.getId().toString()))
             .body(result);
     }
 
@@ -128,7 +129,7 @@ public class EvaluationController {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, evaluation.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, evaluation.getId().toString())
         );
     }
 
@@ -168,7 +169,7 @@ public class EvaluationController {
         evaluationService.delete(id);
         return ResponseEntity
             .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
 }
