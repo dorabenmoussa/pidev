@@ -54,4 +54,6 @@ public interface UtilisateurService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Utilisateur findUtilisateurByEmail(String email);
 }

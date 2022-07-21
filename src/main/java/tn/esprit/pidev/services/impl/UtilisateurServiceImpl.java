@@ -1,5 +1,7 @@
 package tn.esprit.pidev.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import tn.esprit.pidev.entities.Utilisateur;
 import tn.esprit.pidev.repository.UtilisateurRepository;
 import tn.esprit.pidev.services.api.UtilisateurService;
@@ -22,6 +24,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final UtilisateurRepository utilisateurRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
         this.utilisateurRepository = utilisateurRepository;
     }
@@ -29,12 +34,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public Utilisateur save(Utilisateur utilisateur) {
         log.debug("Request to save Utilisateur : {}", utilisateur);
+        utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
         return utilisateurRepository.save(utilisateur);
     }
 
     @Override
     public Utilisateur update(Utilisateur utilisateur) {
         log.debug("Request to save Utilisateur : {}", utilisateur);
+        utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
         return utilisateurRepository.save(utilisateur);
     }
 
@@ -58,7 +65,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                     existingUtilisateur.setEmail(utilisateur.getEmail());
                 }
                 if (utilisateur.getPassword() != null) {
-                    existingUtilisateur.setPassword(utilisateur.getPassword());
+                    existingUtilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
                 }
                 if (utilisateur.getJobTitle() != null) {
                     existingUtilisateur.setJobTitle(utilisateur.getJobTitle());
@@ -90,5 +97,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public void delete(Long id) {
         log.debug("Request to delete Utilisateur : {}", id);
         utilisateurRepository.deleteById(id);
+    }
+
+    @Override
+    public Utilisateur findUtilisateurByEmail(String email) {
+        return utilisateurRepository.findUtilisateurByEmail(email);
     }
 }

@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {}
+public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
+    Utilisateur findUtilisateurByEmail(String email);
+}

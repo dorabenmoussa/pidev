@@ -49,7 +49,7 @@ public class UtilisateurController {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new utilisateur, or with status {@code 400 (Bad Request)} if the utilisateur has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/utilisateurs")
+    @PostMapping("/register")
     public ResponseEntity<Utilisateur> createUtilisateur(@RequestBody Utilisateur utilisateur) throws URISyntaxException {
         log.debug("REST request to save Utilisateur : {}", utilisateur);
         if (utilisateur.getId() != null) {

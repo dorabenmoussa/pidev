@@ -1,20 +1,24 @@
 package tn.esprit.pidev.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import tn.esprit.pidev.*;
 import tn.esprit.pidev.entities.enumeration.Role;
+import tn.esprit.pidev.security.GrantedAuthorityImpl;
 
 /**
  * A Utilisateur.
  */
 @Entity
 @Table(name = "utilisateur")
-public class Utilisateur implements Serializable {
+public class Utilisateur implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,9 +37,13 @@ public class Utilisateur implements Serializable {
     @Column(name = "role")
     private Role role;
 
+
+
     @Column(name = "email")
     private String email;
 
+
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     @Column(name = "password")
     private String password;
 
@@ -122,6 +130,7 @@ public class Utilisateur implements Serializable {
         this.setFirstName(firstName);
         return this;
     }
+
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -530,6 +539,41 @@ public class Utilisateur implements Serializable {
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
+
+    @Override
+    public Collection<GrantedAuthorityImpl> getAuthorities() {
+        Collection<GrantedAuthorityImpl> authorities = new ArrayList<GrantedAuthorityImpl>();
+        // authorities.add();
+        return authorities;
+    }
+
+
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -541,11 +585,7 @@ public class Utilisateur implements Serializable {
         return id != null && id.equals(((Utilisateur) o).id);
     }
 
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
+
 
     // prettier-ignore
     @Override
